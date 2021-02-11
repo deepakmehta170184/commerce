@@ -1,14 +1,32 @@
-import rangeMap from '@lib/range-map'
 import { Layout } from '@components/common'
-import { ProductCard } from '@components/product'
-import { Grid, Marquee, Hero } from '@components/ui'
-import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
-import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import { Text } from '@components/ui'
+import { request } from '../lib/datocms'
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'reactstrap'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faSearch,
+  faArrowAltCircleRight,
+} from '@fortawesome/free-solid-svg-icons'
+import {
+  InputGroup,
+  InputGroupAddon,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+  Button,
+} from 'reactstrap'
 
 import { getConfig } from '@framework/api'
 import getAllProducts from '@framework/api/operations/get-all-products'
-import getSiteInfo from '@framework/api/operations/get-site-info'
-import getAllPages from '@framework/api/operations/get-all-pages'
+import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import AwesomeSlider from 'react-awesome-slider'
+import 'react-awesome-slider/dist/styles.css'
+import { homedir } from 'os'
 
 export async function getStaticProps({
   preview,
@@ -16,137 +34,125 @@ export async function getStaticProps({
 }: GetStaticPropsContext) {
   const config = getConfig({ locale })
 
-  // Get Featured Products
-  const { products: featuredProducts } = await getAllProducts({
-    variables: { field: 'featuredProducts', first: 6 },
-    config,
-    preview,
-  })
-
-  // Get Best Selling Products
-  const { products: bestSellingProducts } = await getAllProducts({
-    variables: { field: 'bestSellingProducts', first: 6 },
-    config,
-    preview,
-  })
-
-  // Get Best Newest Products
-  const { products: newestProducts } = await getAllProducts({
-    variables: { field: 'newestProducts', first: 12 },
-    config,
-    preview,
-  })
-
-  const { categories, brands } = await getSiteInfo({ config, preview })
-  const { pages } = await getAllPages({ config, preview })
-
-  // These are the products that are going to be displayed in the landing.
-  // We prefer to do the computation at buildtime/servertime
-  const { featured, bestSelling } = (() => {
-    // Create a copy of products that we can mutate
-    // Filter products that do not have images
-    const products = [...newestProducts]
-    // If the lists of featured and best selling products don't have enough
-    // products, then fill them with products from the products list, this
-    // is useful for new commerce sites that don't have a lot of products
-    return {
-      featured: rangeMap(6, (i) => featuredProducts[i] ?? products.shift())
-        .filter(nonNullable)
-        .sort((a, b) => a.node.prices.price.value - b.node.prices.price.value)
-        .reverse(),
-      bestSelling: rangeMap(
-        6,
-        (i) => bestSellingProducts[i] ?? products.shift()
-      ).filter(nonNullable),
-    }
-  })()
+  const graphqlRequest = {
+    query: `{ home{ id,
+      homeimg1 {
+        id,
+        url
+      },
+      homevideo {
+        id,
+        url
+      },
+      img1text,
+      homeimg2{
+        id,url
+      }
+      img2text,
+      img1heading,
+      img2heading,
+      img1logo{
+        id,
+        url
+      },
+      img3heading,
+      img3text,
+      img3logo{
+        id,
+        url
+      },
+      bottomslider
+    } }`,
+  }
 
   return {
-    props: {
-      featured,
-      bestSelling,
-      newestProducts,
-      categories,
-      brands,
-      pages,
-    },
-    revalidate: 14400,
+    props: { data: await request(graphqlRequest) },
   }
 }
 
-const nonNullable = (v: any) => v
-
 export default function Home({
-  featured,
-  bestSelling,
-  brands,
-  categories,
-  newestProducts,
+  data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log('data for home: ', data)
+  const HomeData = data.home
+
   return (
-    <div>
-      <Grid>
-        {featured.slice(0, 3).map(({ node }, i) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            imgWidth={i === 0 ? 1080 : 540}
-            imgHeight={i === 0 ? 1080 : 540}
-            imgPriority
-            imgLoading="eager"
-          />
-        ))}
-      </Grid>
-      <Marquee variant="secondary">
-        {bestSelling.slice(3, 6).map(({ node }) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            variant="slim"
-            imgWidth={320}
-            imgHeight={320}
-            imgLayout="fixed"
-          />
-        ))}
-      </Marquee>
-      <Hero
-        headline="Release Details: The Yeezy BOOST 350 V2 ‘Natural'"
-        description="
-        The Yeezy BOOST 350 V2 lineup continues to grow. We recently had the
-        ‘Carbon’ iteration, and now release details have been locked in for
-        this ‘Natural’ joint. Revealed by Yeezy Mafia earlier this year, the
-        shoe was originally called ‘Abez’, which translated to ‘Tin’ in
-        Hebrew. It’s now undergone a name change, and will be referred to as
-        ‘Natural’."
-      />
-      <Grid layout="B">
-        {featured.slice(3, 6).map(({ node }, i) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            imgWidth={i === 1 ? 1080 : 540}
-            imgHeight={i === 1 ? 1080 : 540}
-          />
-        ))}
-      </Grid>
-      <Marquee>
-        {bestSelling.slice(0, 3).map(({ node }) => (
-          <ProductCard
-            key={node.path}
-            product={node}
-            variant="slim"
-            imgWidth={320}
-            imgHeight={320}
-            imgLayout="fixed"
-          />
-        ))}
-      </Marquee>
-      <HomeAllProductsGrid
-        categories={categories}
-        brands={brands}
-        newestProducts={newestProducts}
-      />
-    </div>
+    <>
+      <div className="player-wrapper">
+        <video width="100%" height="500" muted autoPlay>
+          <source src={HomeData.homevideo.url} type="video/mp4" />
+        </video>
+      </div>
+
+      <div className="row no-gutters test_detail_cont">
+        <div className="col-md-4">
+          <div style={{ paddingTop: '5px' }}>
+            <img src={HomeData.img1logo.url} alt="ssvir" />
+          </div>
+          <div className="outer-image-section">
+            <h4>{HomeData.img1heading}</h4>
+            <p>{HomeData.img1text}</p>
+          </div>
+        </div>
+        <div className="col-md-8">
+          <div className="outer-image-section">
+            <img src={HomeData.homeimg1.url} alt="ssvir" />
+          </div>
+        </div>
+      </div>
+      <Container
+        fluid
+        className="px-0 full-width-image"
+        style={{
+          backgroundImage: `url(${HomeData.homeimg2.url})`,
+        }}
+      >
+        {data && (
+          <div className="container">
+            <div className="row" style={{ backgroundColor: 'whitesmoke' }}>
+              <div className="col-md-8 offset-md-2">
+                <h1>{HomeData.img2heading}</h1>
+                <Text>{HomeData.img2text}</Text>
+              </div>
+            </div>
+          </div>
+        )}
+      </Container>
+      <div
+        className="row no-gutters test_detail_cont"
+        style={{ backgroundColor: '#e5f6f8' }}
+      >
+        <div className="col-md-4">
+          <div className="outer-image-section">
+            <h4>{HomeData.img3heading}</h4>
+          </div>
+          <div style={{ paddingTop: '5px' }}>
+            <img src={HomeData.img3logo.url} alt="ssvir" />
+          </div>
+        </div>
+        <div className="col-md-8">
+          <div
+            className="outer-image-section"
+            style={{ paddingTop: ' 8%', paddingLeft: '20px' }}
+          >
+            <p>{HomeData.img3text}</p>
+          </div>
+        </div>
+      </div>
+      <div style={{ backgroundColor: 'none' }}>
+        <AwesomeSlider>
+          <div style={{ padding: '0px 86px 0px 96px' }}>
+            {HomeData.bottomslider.data1}
+          </div>
+          <div style={{ padding: '0px 86px 0px 96px' }}>
+            {HomeData.bottomslider.data2}
+          </div>
+          <div style={{ padding: '0px 86px 0px 96px' }}>
+            {HomeData.bottomslider.data3}
+          </div>
+        </AwesomeSlider>
+      </div>
+    </>
   )
 }
 

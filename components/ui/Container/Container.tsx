@@ -1,5 +1,6 @@
 import cn from 'classnames'
 import React, { FC } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface Props {
   className?: string
@@ -10,7 +11,7 @@ interface Props {
 
 const Container: FC<Props> = ({ children, className, el = 'div', clean }) => {
   const rootClassName = cn(className, {
-    'mx-auto max-w-8xl px-6': !clean,
+    'container': !clean,
   })
 
   let Component: React.ComponentType<React.HTMLAttributes<

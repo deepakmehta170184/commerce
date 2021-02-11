@@ -43,6 +43,9 @@ const Navbar: FC = () => {
               <Link href="/search?q=accessories">
                 <a className={s.link}>Accessories</a>
               </Link>
+              <Link href="/research">
+                <a className={s.link}>Research</a>
+              </Link>
             </nav>
           </div>
 

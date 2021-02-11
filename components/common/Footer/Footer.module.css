@@ -1,3 +1,6 @@
+.root {
+  @apply sticky top-0 z-40 transition-all duration-150;
+}
 .link {
   & > svg {
     @apply transform duration-75 ease-linear;
