@@ -46,6 +46,9 @@ const Navbar: FC = () => {
               <Link href="/research">
                 <a className={s.link}>Research</a>
               </Link>
+              <Link href="/product">
+                <a className={s.link}>Products</a>
+              </Link>
             </nav>
           </div>
 
