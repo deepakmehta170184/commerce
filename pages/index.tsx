@@ -73,9 +73,10 @@ export async function getStaticProps({
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log('data for home: ', data)
+  console.log('data for home: ', data);
+  
   const HomeData = data.home
-
+console.log('Length for bottomSlider: ', typeof HomeData.bottomslider);
   return (
     <>
       <div className="player-wrapper">
@@ -141,15 +142,13 @@ export default function Home({
       </div>
       <div style={{ backgroundColor: 'none' }}>
         <AwesomeSlider>
-          <div style={{ padding: '0px 86px 0px 96px' }}>
-            {HomeData.bottomslider.data1}
+        {Object.keys(HomeData.bottomslider).map(function(key, index) {
+          return <div style={{ padding: '0px 86px 0px 96px' }}>
+          {HomeData.bottomslider[key]}
           </div>
-          <div style={{ padding: '0px 86px 0px 96px' }}>
-            {HomeData.bottomslider.data2}
-          </div>
-          <div style={{ padding: '0px 86px 0px 96px' }}>
-            {HomeData.bottomslider.data3}
-          </div>
+        })
+        }
+        
         </AwesomeSlider>
       </div>
     </>
