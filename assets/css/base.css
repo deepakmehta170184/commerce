@@ -1,8 +1,7 @@
-/* :root {
-  --primary: #ffffff;
+:root {
   --primary-2: #f1f3f5;
   --primary-3: #ff0000;
-  --secondary: #000000;
+  --secondary: #000;
   --secondary-2: #111;
 
   --selection: var(--cyan);
@@ -64,7 +63,13 @@
   --accents-7: #e9ecef;
   --accents-8: #f1f3f5;
   --accents-9: #f8f9fa;
-} */
+  --bg-white: #fff;
+  --bg-dark: #000;
+  --white: #ffffff;
+  --text-base: #000;
+  --text-secondary: white;
+}
+
 
 *,
 *:before,

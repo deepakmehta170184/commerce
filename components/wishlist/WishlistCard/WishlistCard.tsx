@@ -77,7 +77,7 @@ const WishlistCard: FC<Props> = ({ item }) => {
           aria-label="Add to Cart"
           type="button"
           className={
-            'py-1 px-3 border border-secondary rounded-md shadow-sm hover:bg-primary-hover'
+            'py-1 px-3 border border-secondary rounded-md shadow-sm hover:bg-white-hover'
           }
           onClick={addToCart}
           loading={loading}
