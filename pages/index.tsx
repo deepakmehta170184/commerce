@@ -85,7 +85,7 @@ export default function Home({
   return (
     <>
       <div className="player-wrapper">
-        <video width="100%" height="500" muted autoPlay>
+        <video width="100%" height="200" muted autoPlay>
           <source src={HomeData.homevideo.url} type="video/mp4" />
         </video>
       </div>
@@ -115,11 +115,13 @@ export default function Home({
       >
         {data && (
           <div className="container">
-            <div className="row" style={{ backgroundColor: 'whitesmoke' }}>
+            <div className="row">
+              <div className="col-md-12 transparent-bg">
               <div className="col-md-8 offset-md-2">
                 <h1>{HomeData.img2heading}</h1>
                 <Text>{HomeData.img2text}</Text>
               </div>
+            </div>
             </div>
           </div>
         )}
@@ -149,7 +151,7 @@ export default function Home({
         <AwesomeSlider>
           {Object.keys(HomeData.bottomslider).map(function (key, index) {
             return (
-              <div style={{ padding: '0px 86px 0px 96px' }}>
+              <div style={{ padding: '0px 130px 0px 130px' }}>
                 {HomeData.bottomslider[key]}
               </div>
             )

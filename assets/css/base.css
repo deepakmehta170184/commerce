@@ -248,9 +248,7 @@ a {
   position: relative;
 }
 .test_detail_cont .col-md-4 .outer-image-section {
-  position: absolute;
-  top: 40%;
-  left: 30px;
+  position: relative;
 }
 .test_detail_cont .col-md-4 .outer-image-section h3,
 .test_detail_cont .col-md-4 .outer-image-section img {
@@ -334,4 +332,63 @@ a {
 /* Research page Styling end */
 .awssld__content {
   background-color: white !important;
+}
+/*-- New Style --*/
+.shadow-magical {
+  background: #fff;
+}
+.Searchbar_input__2JN1M {
+  height: 48px;
+}
+.Navbar_link__3Blki:hover {
+  text-decoration: none;
+}
+.UserNav_item__2sdMO a {
+  color: #000000;
+}
+.UserNav_item__2sdMO a:hover {
+  color: #868e96;
+}
+.Layout_root__3wCB1 .FeatureBar_root__21Jd5 {
+  z-index: 111;
+}
+.ProductCard_imageContainer__bPqUi {
+  position: relative;
+  top: 20%;
+}
+.test_detail_cont .col-md-4 {
+  background-color: #ffffff;
+  padding-top: 50px;
+  padding-left: 15px !important;
+}
+.test_detail_cont {
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+.transparent-bg {
+  background: rgb(234 234 234 / 75%);
+  padding: 30px 0;
+}
+.awssld__wrapper .awssld__container {
+  padding-bottom: 500px;
+}
+.awssld__bullets {
+  bottom: 50px;
+  z-index: 10;
+}
+.awssld .awssld__bullets {
+  bottom: 50px;
+}
+.ProductCard_imageContainer__bPqUi > div {
+  min-width: 40% !important;
+}
+.HomeAllProductsGrid_aside__hZg8x ul li a,
+.HomeAllProductsGrid_aside__hZg8x ul li a:hover {
+  color: #000;
+  text-decoration: none;
+}
+footer.Footer_root__3bxSy a,
+footer.Footer_root__3bxSy a:hover {
+  color: #000;
+  text-decoration: none;
 }

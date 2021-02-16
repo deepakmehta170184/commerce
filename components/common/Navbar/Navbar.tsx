@@ -25,7 +25,7 @@ const Navbar: FC = () => {
 
   return (
     <div className={cn(s.root, { 'shadow-magical': hasScrolled })}>
-      <Container>
+      <div className="container-fluid">
         <div className="relative flex flex-row justify-between py-4 align-center md:py-6">
           <div className="flex items-center flex-1">
             <Link href="/">
@@ -64,7 +64,7 @@ const Navbar: FC = () => {
         <div className="flex pb-4 lg:px-6 lg:hidden">
           <Searchbar id="mobile-search" />
         </div>
-      </Container>
+      </div>
     </div>
   )
 }

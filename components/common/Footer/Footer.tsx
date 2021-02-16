@@ -23,7 +23,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
 
   return (
     <footer className={cn(s.root)}>
-      <Container fluid>
+      <div className="container-fluid">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-2 py-12 text-primary transition-colors duration-150">
           <div className="col-span-1 lg:col-span-2">
             <Link href="/">
@@ -39,21 +39,21 @@ const Footer: FC<Props> = ({ className, pages }) => {
             <ul className="flex flex-initial flex-col md:flex-1">
               <li className="py-3 md:py-0 md:pb-4">
                 <Link href="/">
-                  <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                  <a className="hover:text-accents-6 transition ease-in-out duration-150">
                     Home
                   </a>
                 </Link>
               </li>
               <li className="py-3 md:py-0 md:pb-4">
                 <Link href="/">
-                  <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                  <a className="hover:text-accents-6 transition ease-in-out duration-150">
                     Careers
                   </a>
                 </Link>
               </li>
               <li className="py-3 md:py-0 md:pb-4">
                 <Link href="/blog">
-                  <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                  <a className="hover:text-accents-6 transition ease-in-out duration-150">
                     Blog
                   </a>
                 </Link>
@@ -61,7 +61,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               {sitePages.map((page) => (
                 <li key={page.url} className="py-3 md:py-0 md:pb-4">
                   <Link href={page.url!}>
-                    <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                    <a className="hover:text-accents-6 transition ease-in-out duration-150">
                       {page.name}
                     </a>
                   </Link>
@@ -74,7 +74,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
               {legalPages.map((page) => (
                 <li key={page.url} className="py-3 md:py-0 md:pb-4">
                   <Link href={page.url!}>
-                    <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                    <a className="hover:text-accents-6 transition ease-in-out duration-150">
                       {page.name}
                     </a>
                   </Link>
@@ -99,23 +99,22 @@ const Footer: FC<Props> = ({ className, pages }) => {
           <div>
             <span>&copy; 2020 ACME, Inc. All rights reserved.</span>
           </div>
-          <div className="flex items-center text-primary">
-            <span className="text-primary">Crafted by</span>
+          <div className="flex items-center">
+            <span>Crafted by</span>
             <a
               rel="noopener"
               href="https://vercel.com"
               aria-label="Vercel.com Link"
               target="_blank"
-              className="text-primary"
             >
               <Vercel
-                className="inline-block h-6 ml-4 text-primary"
+                className="inline-block h-6 ml-4"
                 alt="Vercel.com Logo"
               />
             </a>
           </div>
         </div>
-      </Container>
+      </div>
     </footer>
   )
 }
