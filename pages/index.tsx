@@ -61,7 +61,12 @@ export async function getStaticProps({
         id,
         url
       },
-      bottomslider
+      bottomslider,
+      purchasetext,
+      purchaseheading,
+      purchasebanner{
+        id,url
+    }
     } }`,
   }
 
@@ -73,10 +78,10 @@ export async function getStaticProps({
 export default function Home({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log('data for home: ', data);
-  
+  console.log('data for home: ', data)
+
   const HomeData = data.home
-console.log('Length for bottomSlider: ', typeof HomeData.bottomslider);
+  console.log('Length for bottomSlider: ', typeof HomeData.bottomslider)
   return (
     <>
       <div className="player-wrapper">
@@ -125,15 +130,27 @@ console.log('Length for bottomSlider: ', typeof HomeData.bottomslider);
       </div>
       <div className="home_quotes">
         <AwesomeSlider>
-        {Object.keys(HomeData.bottomslider).map(function(key, index) {
-          return <div style={{ padding: '0px 86px 0px 96px' }}>
-          {HomeData.bottomslider[key]}
-          </div>
-        })
-        }
-        
+          {Object.keys(HomeData.bottomslider).map(function (key, index) {
+            return (
+              <div style={{ padding: '0px 86px 0px 96px' }}>
+                {HomeData.bottomslider[key]}
+              </div>
+            )
+          })}
         </AwesomeSlider>
       </div>
+      <Container fluid className="px-0 full-width-image" style={{backgroundImage: `url(${HomeData.purchasebanner.url})`}}>         
+          {data && (
+            <div className="container">
+              <div className="row">
+                <div className="col-md-8 offset-md-2">
+                <h1 style={{color:'white', textAlign:'left'}}>{HomeData.purchaseheading}</h1>
+                    <p style={{color:'white', textAlign:'left'}}>{HomeData.purchasetext}</p>
+                </div>
+              </div>
+            </div>
+          )}
+      </Container>
     </>
   )
 }
