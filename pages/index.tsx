@@ -106,7 +106,7 @@ export default function Home({
         <Container>
           <Row>
             <Col xs="12">
-                <img src={HomeData.homeimg1.url} alt="ssvir" />
+                <img src={HomeData.homeimg2.url} alt="ssvir" />
                 {data && (
                   <div className="text-center p-10">
                     <h1>{HomeData.img2heading}</h1>
