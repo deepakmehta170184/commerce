@@ -2,7 +2,7 @@ import { Layout } from '@components/common'
 import { Text } from '@components/ui'
 import { request } from '../lib/datocms'
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -84,63 +84,46 @@ console.log('Length for bottomSlider: ', typeof HomeData.bottomslider);
           <source src={HomeData.homevideo.url} type="video/mp4" />
         </video>
       </div>
-
-      <div className="row no-gutters test_detail_cont">
-        <div className="col-md-4">
-          <div style={{ paddingTop: '5px' }}>
+      
+      <Container className="pt-10">
+        <Row className="pt-10">
+          <Col md="4">
             <img src={HomeData.img1logo.url} alt="ssvir" />
-          </div>
-          <div className="outer-image-section">
             <h4>{HomeData.img1heading}</h4>
             <p>{HomeData.img1text}</p>
-          </div>
-        </div>
-        <div className="col-md-8">
-          <div className="outer-image-section">
+          </Col>
+          <Col md="8">
             <img src={HomeData.homeimg1.url} alt="ssvir" />
-          </div>
-        </div>
-      </div>
-      <Container
-        fluid
-        className="px-0 full-width-image"
-        style={{
-          backgroundImage: `url(${HomeData.homeimg2.url})`,
-        }}
-      >
-        {data && (
-          <div className="container">
-            <div className="row" style={{ backgroundColor: 'whitesmoke' }}>
-              <div className="col-md-8 offset-md-2">
-                <h1>{HomeData.img2heading}</h1>
-                <Text>{HomeData.img2text}</Text>
-              </div>
-            </div>
-          </div>
-        )}
+          </Col>
+        </Row>
       </Container>
-      <div
-        className="row no-gutters test_detail_cont"
-        style={{ backgroundColor: '#e5f6f8' }}
-      >
-        <div className="col-md-4">
-          <div className="outer-image-section">
-            <h4>{HomeData.img3heading}</h4>
-          </div>
-          <div style={{ paddingTop: '5px' }}>
-            <img src={HomeData.img3logo.url} alt="ssvir" />
-          </div>
-        </div>
-        <div className="col-md-8">
-          <div
-            className="outer-image-section"
-            style={{ paddingTop: ' 8%', paddingLeft: '20px' }}
-          >
-            <p>{HomeData.img3text}</p>
-          </div>
-        </div>
+      <div className="home_aside_cont">
+        <Container>
+          <Row>
+            <Col xs="12">
+                <img src={HomeData.homeimg1.url} alt="ssvir" />
+                {data && (
+                  <div className="text-center p-10">
+                    <h1>{HomeData.img2heading}</h1>
+                    <Text>{HomeData.img2text}</Text>
+                  </div>
+                )}
+            </Col>
+          </Row>
+          <Row className="pt-10">
+            <Col md="12" className="pt-10">
+              <h4>{HomeData.img3heading}</h4>
+            </Col>
+            <Col md="4">
+              <img src={HomeData.img3logo.url} alt="ssvir" />
+            </Col>
+            <Col md="8" className="pt-10">
+              <p>{HomeData.img3text}</p>
+            </Col>
+          </Row>
+        </Container>
       </div>
-      <div style={{ backgroundColor: 'none' }}>
+      <div className="home_quotes">
         <AwesomeSlider>
         {Object.keys(HomeData.bottomslider).map(function(key, index) {
           return <div style={{ padding: '0px 86px 0px 96px' }}>

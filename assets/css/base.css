@@ -6,9 +6,8 @@
 
   --selection: var(--cyan);
 
-  --text-base: #000000;
-  --text-primary: #000000;
-  --text-secondary: white;
+  --text-black: #000;
+  --text-white: #fff;
 
   --hover: rgba(0, 0, 0, 0.075);
   --hover-1: rgba(0, 0, 0, 0.15);
@@ -39,7 +38,7 @@
     'Helvetica', sans-serif;
 }
 
-[data-theme='dark'] {
+/* [data-theme='dark'] {
   --primary: #000000;
   --primary-2: #111;
   --secondary: #ffffff;
@@ -68,7 +67,7 @@
   --white: #ffffff;
   --text-base: #000;
   --text-secondary: white;
-}
+} */
 
 
 *,
@@ -105,6 +104,12 @@ body {
 
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.nt_undrlin:hover {
+  text-decoration: none;
+}
+a.text-base:hover {
+  color: #000;
 }
 
 .animated {
@@ -335,3 +340,41 @@ a {
 .awssld__content {
   background-color: white !important;
 }
+
+
+/* Home page styling start */
+.player-wrapper {
+  position: relative;
+  padding-top: 0.25%; /* 720 / 1280 = 0.5625 */
+  height: 90vh;
+  overflow: hidden;
+}
+
+.home_aside_cont {
+  background: url('../img/wave-long-withgradient-2.jpg') #e5f6f8 no-repeat;
+}
+.home_aside_cont img {
+  width: 100%;
+}
+.home_aside_cont .text-center {
+  top: 50%;
+  left: 15px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  max-width: 97%;
+  background:rgba(255, 255, 255, 0.75);
+  position: absolute;
+}
+
+.home_quotes {
+  background: url('../img/testimonials-bgd.png') center top no-repeat;
+  background-size: 150% auto;
+}
+.home_quotes .awssld__container {
+  /* padding: 0 100px; */
+  height: auto;
+}
+.home_quotes .awssld__content {
+  background-color: transparent !important;
+}
+/* Home page styling end */

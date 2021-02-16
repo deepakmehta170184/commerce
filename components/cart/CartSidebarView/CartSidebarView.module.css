@@ -3,7 +3,7 @@
 }
 
 .root.empty {
-  @apply bg-secondary text-secondary;
+  @apply bg-secondary text-white;
 }
 
 .root.success {
